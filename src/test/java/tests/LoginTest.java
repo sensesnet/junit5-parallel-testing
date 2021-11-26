@@ -10,19 +10,16 @@ public class LoginTest extends BaseTest {
     @Test
     public void invalidLoginTest_InvalidUserNameInvalidPassword() {
         page.getPage(HomePage.class)
-            .givenIAmAtHomePage()
-            .whenIGoToLoginPage()
-            .andILoginToN11("onur@swtestacademy.com", "11223344")
-            .thenIVerifyLogEntryFailMessage();
+                .givenIAmAtHomePage()
+                .whenIGoToDocsPage()
+                .checkPage();
     }
 
     @Test
     public void invalidLoginTest_EmptyUserEmptyPassword() {
         page.getPage(HomePage.class)
-            .givenIAmAtHomePage()
-            .whenIGoToLoginPage()
-            .andILoginToN11("", "")
-            .thenIVerifyLoginUserNameErrorMessage("Lütfen e-posta adresinizi girin.")
-            .thenIVerifyPasswordErrorMessage("Bu alanın doldurulması zorunludur.");
+                .givenIAmAtHomePage()
+                .whenIGoToDocsPage()
+                .checkPage();
     }
 }

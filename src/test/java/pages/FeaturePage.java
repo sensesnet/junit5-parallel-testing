@@ -10,45 +10,51 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import utils.LogUtil;
 
-public class LoginPage extends BasePage {
+public class FeaturePage extends BasePage {
 
     //*********Constructor*********
-    public LoginPage(WebDriver driver) {
+    public FeaturePage(WebDriver driver) {
         super(driver);
     }
 
     //*********Web Elements by using Page Factory*********
-    @FindBy(how = How.ID, using = "email")
-    public WebElement userName;
+    @FindBy(how = How.XPATH, using = "//div[text()='Cross Platform']")
+    public WebElement platform;
 
-    @FindBy(how = How.ID, using = "password")
-    public WebElement password;
 
     By loginButton            = By.id("loginButton");
     By errorMessageUsernameBy = By.xpath("//*[@id=\"loginForm\"]/div[1]/div/div");
     By errorMessagePasswordBy = By.xpath("//*[@id=\"loginForm\"]/div[2]/div/div");
 
     //*********Page Methods*********
-    public LoginPage andILoginToN11(String userName, String password) {
-        writeText(this.userName, userName);
-        writeText(this.password, password);
-        jsClick(loginButton);
-        return this;
-    }
+//    public FeaturePage andILoginToN11(String userName, String password) {
+//        writeText(this.userName, userName);
+//        writeText(this.password, password);
+//        jsClick(loginButton);
+//        return this;
+//    }
 
-    public LoginPage thenIVerifyLoginUserNameErrorMessage(String expectedText) {
+    public FeaturePage thenIVerifyLoginUserNameErrorMessage(String expectedText) {
         assertEquals(expectedText, readText(errorMessageUsernameBy));
         return this;
     }
 
-    public LoginPage thenIVerifyPasswordErrorMessage(String expectedText) {
+    public FeaturePage thenIVerifyPasswordErrorMessage(String expectedText) {
         assertEquals(expectedText, readText(errorMessagePasswordBy));
         return this;
     }
 
-    public LoginPage thenIVerifyLogEntryFailMessage() {
+    public FeaturePage thenIVerifyLogEntryFailMessage() {
         assertTrue(LogUtil.isLoginErrorLog(driver));
         return this;
     }
 
+    public void checkPage() {
+        assertTrue(platform.isDisplayed());
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
